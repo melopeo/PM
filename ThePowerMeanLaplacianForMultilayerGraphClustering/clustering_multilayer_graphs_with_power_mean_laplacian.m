@@ -53,7 +53,7 @@ if nargin < 4
 end
 
 if nargin < 5
-    method_str = 'polynomial_krylov';
+    method_str = 'eigs';
 end
 
 if nargin < 6

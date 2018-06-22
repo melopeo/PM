@@ -1,0 +1,52 @@
+function example
+
+restoredefaultpath
+addpath(genpath('utils'))
+addpath(genpath('ThePowerMeanLaplacianForMultilayerGraphClustering'))
+
+%% Example where the first layer is informative and the second is not informative
+numLayers                 = 2;
+numNodes                  = 100;
+numClusters               = 2;
+groundTruth               = zeros(numNodes,1);
+groundTruth(1:numNodes/2) = 1;
+GroundTruthPerLayerCell   = {groundTruth, groundTruth};
+pinVec                    = [0.9 0.1];
+poutVec                   = [0.1 0.9];
+s                         = RandStream('mcg16807','Seed',0); RandStream.setGlobalStream(s);
+Wcell                     = generate_multilayer_graph(numLayers, GroundTruthPerLayerCell, pinVec, poutVec);
+
+% visualize adjacency matrices
+figure, hold on
+subplot(1,2,1), spy(Wcell{1}), title('First Layer')
+subplot(1,2,2), spy(Wcell{2}), title('Second Layer')
+
+% Clustering with p = 10
+method_str  = 'polynomial_krylov'; %'eigs';
+p           = 10; 
+diagShift   = 0;
+s           = RandStream('mcg16807','Seed',0); RandStream.setGlobalStream(s);
+C           = clustering_multilayer_graphs_with_power_mean_laplacian(Wcell, p, numClusters, diagShift, method_str);
+figure, stem(C)
+1;
+
+% Clustering with p = 1 (Arithmetic Mean)
+method_str  = 'polynomial_krylov'; %'eigs';
+p           = 1; 
+diagShift   = 0;
+s           = RandStream('mcg16807','Seed',0); RandStream.setGlobalStream(s);
+C           = clustering_multilayer_graphs_with_power_mean_laplacian(Wcell, p, numClusters, diagShift, method_str);
+figure, stem(C)
+1;
+1;
+
+% Clustering with p = 0 (Arithmetic Mean)
+method_str  = 'polynomial_krylov'; %'eigs';
+p           = 1; 
+diagShift   = 0;
+s           = RandStream('mcg16807','Seed',0); RandStream.setGlobalStream(s);
+C           = clustering_multilayer_graphs_with_power_mean_laplacian(Wcell, p, numClusters, diagShift, method_str);
+figure, stem(C)
+1;
+1;
+

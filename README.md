@@ -7,16 +7,12 @@ MATLAB implementation of the paper:
 ## Content:
 - `example.m` : contains three easy examples showing how to use the code
 
-- `SBM_execute.m` : runs spectral clustering on signed networks under the stochastic block model (Fig.2 of our [paper](http://papers.nips.cc/paper/6164-clustering-signed-networks-with-the-geometric-mean-of-laplacians.pdf))
-
-- `wikipedia_example_analysis.m` : generates plots from Wikipedia experiment (Fig.4 of our [paper](http://papers.nips.cc/paper/6164-clustering-signed-networks-with-the-geometric-mean-of-laplacians.pdf)). 
-   - The corresponding eigenvectors are precomputed with `wikipedia_example.m` and are located in the folder `Wikipedia/wikipedia_example`
-   
+- `experiments_main.m.m` : runs experiments contained in our [paper](http://papers.nips.cc/paper/6164-clustering-signed-networks-with-the-geometric-mean-of-laplacians.pdf)
+ 
 ## Usage:
-Let `Wpos` and `Wneg` be the positive and negative adjacency matrices, respectively, and `numClusters` the desired number of clusters. Clusters through the geometric mean Laplacian are computed via
-
+Let `Wcell` be a cell with the adjacency matrices of each layer , `p` the power of the power mean Laplacian, `numClusters` the desired number of clusters. Clusters through the power mean Laplacian `L_p` are computed via
 ```
-C = clustering_signed_networks_with_geometric_mean_of_Laplacians(Wpos,Wneg,numClusters);
+C = clustering_multilayer_graphs_with_power_mean_laplacian(Wcell, p, numClusters);
 ```
 ## Quick Overview:
 ![](https://github.com/melopeo/PM/blob/master/PaperAndPoster/ThePowerMeanLaplacianForMultilayerGraphClustering_poster.jpg)

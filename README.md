@@ -1,7 +1,5 @@
 # PM
-##The Power Mean Laplacian for Multilayer Graph Clustering
-
-## Clustering Signed Networks with the Geometric Mean of Laplacians
+## The Power Mean Laplacian for Multilayer Graph Clustering
 
 MATLAB implementation of the paper:
 

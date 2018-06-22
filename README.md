@@ -5,7 +5,7 @@ MATLAB implementation of the paper:
 [P. Mercado, A. Gautier, F. Tudisco, and M. Hein, The Power Mean Laplacian for Multilayer Graph Clustering. In AISTATS 2018.](http://proceedings.mlr.press/v84/mercado18a/mercado18a.pdf)
 
 ## Content:
-- `example.m` : contains three easy examples showing how to use the code
+- `example.m` : contains an easy example showing how to use the code
 
 - `experiments_main.m` : runs experiments contained in our [paper](http://papers.nips.cc/paper/6164-clustering-signed-networks-with-the-geometric-mean-of-laplacians.pdf)
  

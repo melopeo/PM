@@ -1,4 +1,4 @@
-function W=BuildWeightsFromDistancePedro(dist2,NN,whichType)
+function W=BuildWeightsFromDistance(dist2,NN,whichType)
 % input: 
 % dist2     - distance matrix of the data
 % NN        - number of neighbors for graph construction

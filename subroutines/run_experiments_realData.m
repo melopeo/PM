@@ -11,7 +11,7 @@ function C_cell_power_mean = run_experiments_realData(p, diagShiftValue, data, l
         knnPos        = knnVector(j);
         M             = corr(data{j}');
 
-        W_knn_cell{j} = BuildWeightsFromDistancePedro(M,knnPos,'kfn');
+        W_knn_cell{j} = BuildWeightsFromDistance(M,knnPos,'kfn');
         W_knn_cell{j} = M.*W_knn_cell{j};
         W_knn_cell{j} = 0.5*(W_knn_cell{j}+W_knn_cell{j}');
     end

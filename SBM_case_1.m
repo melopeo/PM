@@ -1,7 +1,16 @@
 function SBM_case_1
 
+% Runs experiment corresponding to section 3.1 of our paper
+
+% structure of multilayer graph:
+% - 2 clusters
+% - Two layers:
+% - - Layer one is strongly informative (assortative)
+% - - Layer two goes from an assortative to an assortative configuration
+
 restoredefaultpath
 addpath(genpath('utils'))
+addpath(genpath('subroutines'))
 addpath(genpath('ThePowerMeanLaplacianForMultilayerGraphClustering'))
 
 dirName_Output_Data = 'SBM_case_1';
@@ -9,16 +18,18 @@ if ~exist(dirName_Output_Data,'dir')
     mkdir(dirName_Output_Data)
 end
 
-% Graph data
+% Multilayer Graph data
 sizeOfEachCluster   = 100;
 numClusters         = 2;
 numLayers           = 2;
 
+% Ground Truth vector
 GroundTruth         = [];
 for i = 1:numClusters
     GroundTruth = [GroundTruth; i*ones(sizeOfEachCluster,1)];
 end
 
+% Setting ground truth per layer
 GroundTruthPerLayerCell     = cell(numLayers,1);
 for i = 1:numLayers
     GroundTruthPerLayerCell{i} = GroundTruth;
@@ -27,22 +38,25 @@ end
 % Data for power means
 pArray                 = [10,5,2,1,0,-1,-2,-5,-10];
 idxNeg                 = find(pArray<=0);
+
+% Setting diagonal shift depending of value of power 'p'
 diagShiftArray         = ones(size(pArray));
 diagShiftArray(idxNeg) = log(1+abs(pArray(idxNeg)))+1;
 
+% computation method
 method_str = 'eigs';
 % method_str = 'polynomial_krylov';
 
 % Mixing parameter
 diffArray         = -0.05:0.005:0.05;
-pin_Layer1_Array  = (0.1+diffArray)/2;
-pout_Layer1_Array = (0.1-diffArray)/2;
+pin_Layer1_Array  = (0.1+diffArray)/2; %p_in of layer 1
+pout_Layer1_Array = (0.1-diffArray)/2; %p_out of layer 2
 
-pin_Layer2_Array  = 0.09*ones(size(diffArray));
-pout_Layer2_Array = 0.01*ones(size(diffArray));
+pin_Layer2_Array  = 0.09*ones(size(diffArray)); %p_in of layer 2
+pout_Layer2_Array = 0.01*ones(size(diffArray)); %p_out of layer 2
 
-pin_input         = [pin_Layer1_Array(:)  pin_Layer2_Array(:) ];
-pout_input        = [pout_Layer1_Array(:) pout_Layer2_Array(:)];
+pin_input         = [pin_Layer1_Array(:)  pin_Layer2_Array(:) ]; %p_in per layer
+pout_input        = [pout_Layer1_Array(:) pout_Layer2_Array(:)]; %p_out per layer
 1;
 
 % number of runs

@@ -1,6 +1,8 @@
 function SBM_case_2
 
-% Fixing structure of graph:
+% Runs experiment corresponding to section 3.2 of our paper
+
+% structure of multilayer graph:
 % - 3 clusters
 % - Each layer is only bringing information about one cluster. In particular
 % - - Layer one brings info about cluster 1
@@ -9,6 +11,7 @@ function SBM_case_2
 
 restoredefaultpath
 addpath(genpath('utils'))
+addpath(genpath('subroutines'))
 addpath(genpath('ThePowerMeanLaplacianForMultilayerGraphClustering'))
 
 dirName_Output_Data = 'SBM_case_2';
@@ -19,17 +22,19 @@ end
 method_str = 'eigs';
 % method_str = 'polynomial_krylov';
 
-% Graph data
+% Multilayer Graph data
 sizeOfEachCluster   = 100;
 numClusters         = 3;
 numLayers           = 3;
 sizeOfGraph         = numClusters*sizeOfEachCluster;
 
+% GLOBAL Ground Truth vector
 GroundTruth         = [];
 for i = 1:numClusters
     GroundTruth = [GroundTruth; i*ones(sizeOfEachCluster,1)];
 end
 
+% Setting ground truth per layer
 GroundTruthPerLayerCell     = cell(numLayers,1);
 for i = 1:numLayers
     GroundTruthPerLayerCell{i} = GroundTruth == i;
@@ -38,13 +43,16 @@ end
 % Data for power means
 pArray                 = [10,5,2,1,0,-1,-2,-5,-10];
 idxNeg                 = find(pArray<=0);
+
+% Setting diagonal shift depending of value of power 'p'
 diagShiftArray         = ones(size(pArray));
 diagShiftArray(idxNeg) = log(1+abs(pArray(idxNeg)))+1;
 
 % Mixing parameter
 diffArray              = 0.0:0.005:0.1;
-pinArray               = (0.1+diffArray)/2;
-poutArray              = (0.1-diffArray)/2;
+pinArray               = (0.1+diffArray)/2; %p_in ofall  layers
+poutArray              = (0.1-diffArray)/2; %p_out of all layers
+
 % number of runs
 numRuns = 10;
 

@@ -2,6 +2,7 @@ function example
 
 restoredefaultpath
 addpath(genpath('utils'))
+addpath(genpath('subroutines'))
 addpath(genpath('ThePowerMeanLaplacianForMultilayerGraphClustering'))
 
 %% Example where the first layer is informative and the second is not informative

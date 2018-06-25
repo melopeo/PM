@@ -1,5 +1,7 @@
 function experiments_realData
 
+% Experiments corresponding to section 5 of our paper
+
 dirName_Output_Data = 'experiments_realData';
 if ~exist(dirName_Output_Data,'dir')
     mkdir(dirName_Output_Data)
@@ -7,6 +9,7 @@ end
 
 restoredefaultpath
 addpath(genpath('utils'))
+addpath(genpath('subroutines'))
 addpath(genpath('Datasets'))
 addpath(genpath('ThePowerMeanLaplacianForMultilayerGraphClustering'))
 

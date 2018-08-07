@@ -17,7 +17,7 @@ method_str = 'eigs';
 % method_str = 'polynomial_krylov';
 
 % datasets location and info
-dir_data      = '../utils/MultiVewClusteringViaConceptFactorizationWithLocalManifoldRegularization/Code_MVCC/Dataset/';
+dir_data      = 'Datasets/';
 dataname_cell = {'3sources','BBC4view_685','BBCSport2view_544','WikipediaArticles', 'UCI_mfeat', 'citeseer', 'cora', 'webKB_texas_2'};
 
 knnArray       = [20,40,60,80,100];
